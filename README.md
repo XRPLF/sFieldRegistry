@@ -204,7 +204,7 @@ Type 7
 |14|MemoFormat|All Txns|n/a|
 |16|Fulfillment|EscrowCreate|n/a|
 |17|Condition|EscrowCreate|n/a|
-|18|MasterSignature|SignerListSet|Not Signing|
+|18|MasterSignature|ValidatorList|n/a|
 |19|UNLModifyValidator|negativeUNL|n/a|
 |20|ValidatorToDisable|negativeUNL|n/a|
 |21|ValidatorToReEnable|negativeUNL|n/a|
