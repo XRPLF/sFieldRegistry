@@ -1,9 +1,9 @@
-# How to use
+# SFCode Registry Tables
+## How to use
 1. If you are working on an Amendment to the XRP Ledger (or a sidechain) and you need additional serialized fields then you should register them here to avoid clobbering others.
 2. Register by opening a PR against this repo with your proposed registration as changes to the tables below. Provided the reservations are reasonable these will be accepted. If your code is already in use then enter it into the `used by` column otherwise use the `registered by` column.
 3. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
-# Registry Tables
 
 ## UINT8
 Type 16
