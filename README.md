@@ -97,6 +97,7 @@ Type 2
 |44|BurnedNFTokens|XLS20|n/a|
 |45|HookStateCount|Hooks|n/a|
 |46|EmitGeneration|Hooks|n/a|
+|49|LockCount|XLS34|n/a|
 
 
 ## UINT64
@@ -201,6 +202,7 @@ Type 6
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
+|31|LockedBalance|XLS34|n/a|
 
 
 ## BLOB

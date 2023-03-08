@@ -62,7 +62,8 @@
         "43": "|43|MintedNFTokens|XLS20|n/a|",
         "44": "|44|BurnedNFTokens|XLS20|n/a|",
         "45": "|45|HookStateCount|Hooks|n/a|",
-        "46": "|46|EmitGeneration|Hooks|n/a|"
+        "46": "|46|EmitGeneration|Hooks|n/a|",
+        "49": "|49|LockCount|XLS34|n/a|"
     },
     "UInt64": {
         "1": "|1|IndexNext|Directories|n/a|",
@@ -141,7 +142,8 @@
         "19": "|19|NFTokenBrokerFee|XLS20|n/a|",
         "22": "|22|BaseFeeDrops|FeeSettings|n/a|",
         "23": "|23|ReserveBaseDrops|FeeSettings|n/a|",
-        "24": "|24|ReserveIncrementDrops|FeeSettings|n/a|"
+        "24": "|24|ReserveIncrementDrops|FeeSettings|n/a|",
+        "31": "|31|LockedBalance|XLS34|n/a|"
     },
     "Blob": {
         "1": "|1|PublicKey|All Txns|n/a|",
