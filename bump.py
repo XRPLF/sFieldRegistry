@@ -92,6 +92,7 @@ def run(definitions: Dict[str, Any], name: str):
 
 1. If you are working on an Amendment to the XRP Ledger (or a sidechain) and you need additional serialized fields then you should register them here to avoid clobbering others.
 2. Register by opening a PR against this repo with your proposed registration as changes to the tables below. Provided the reservations are reasonable these will be accepted.
+3. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
 ## Quick Bump
 
@@ -103,8 +104,6 @@ python3 bump.py | action | name | path
 `python3 bump.py rippled Hooks ./rippled`
 
 This will update the `README.md` and the `map.json` file.
-
-3. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
 """
     for k, v in new_type_map.items():
@@ -127,9 +126,13 @@ This will update the `README.md` and the `map.json` file.
         output_value += '\n'
 
         new_type_map[k] = sorted_fields
-
+    
     output_value += f'## TRANSACTION RESULTS' + '\n'
     output_value += '\n'
+    output_value += """
+|Response Code|Response Name|Used by|Reserved by|
+|-|-|-|-|
+"""
     for k, v in new_result_map.items():
         output_value += v
         output_value += '\n'
