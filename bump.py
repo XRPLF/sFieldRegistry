@@ -102,13 +102,16 @@ This will update the `README.md` and the `map.json` file.
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
 """
-        for ik, iv in v.items():
+        sorted_fields = {k: v for k, v in sorted(v.items(), key=lambda item: int(item[0]))}
+        for _, iv in sorted_fields.items():
             output_value += iv
             output_value += '\n'
             iv = None
 
         output_value += '\n'
         output_value += '\n'
+
+        new_type_map[k] = sorted_fields
 
     write_file('./README.md', output_value)
     write_json('./map.json', new_type_map)
@@ -232,7 +235,6 @@ def run_rippled(path: str, amendment: str):
 
         definitions["FIELDS"] = fields
 
-    # return the cpp_map
     run(definitions, amendment)
 
 
