@@ -122,7 +122,8 @@
         "30": "|30|HookStateKey|Hooks|n/a|",
         "31": "|31|HookHash|Hooks|n/a|",
         "32": "|32|HookNamespace|Hooks|n/a|",
-        "33": "|33|HookSetTxnID|Hooks|n/a|"
+        "33": "|33|HookSetTxnID|Hooks|n/a|",
+        "36": "|36|URITokenID|XLS35|n/a|"
     },
     "Amount": {
         "1": "|1|Amount|Payment, TrustSet|n/a|",
