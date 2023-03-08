@@ -1,9 +1,23 @@
-# SFCode Registry Tables
-## How to use
-1. If you are working on an Amendment to the XRP Ledger (or a sidechain) and you need additional serialized fields then you should register them here to avoid clobbering others.
-2. Register by opening a PR against this repo with your proposed registration as changes to the tables below. Provided the reservations are reasonable these will be accepted. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column.
-3. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
+# SFCode Registry Tables
+
+## How to use
+
+1. If you are working on an Amendment to the XRP Ledger (or a sidechain) and you need additional serialized fields then you should register them here to avoid clobbering others.
+2. Register by opening a PR against this repo with your proposed registration as changes to the tables below. Provided the reservations are reasonable these will be accepted.
+
+## Quick Bump
+
+You can use the quick bump if you already have the definitions file or a rippled build
+
+python3 bump.py | action | name | path
+
+`python3 bump.py definitions Hooks ./definitions.json`
+`python3 bump.py rippled Hooks ./rippled`
+
+This will update the `README.md` and the `map.json` file.
+
+3. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
 ## UINT8
 Type 16
@@ -15,6 +29,7 @@ Type 16
 |3|TransactionResult|Metadata|n/a|
 |16|TickSize|Orderbooks|n/a|
 |17|UNLModifyDisabling|negativeUNL|n/a|
+|18|HookResult|Hooks|n/a|
 
 
 ## UINT16
@@ -31,6 +46,7 @@ Type 1
 |18|HookEmitCount|Hooks|n/a|
 |19|HookExecutionIndex|Hooks|n/a|
 |20|HookApiVersion|Hooks|n/a|
+
 
 ## UINT32
 Type 2
@@ -82,6 +98,7 @@ Type 2
 |45|HookStateCount|Hooks|n/a|
 |46|EmitGeneration|Hooks|n/a|
 
+
 ## UINT64
 Type 3
 
@@ -105,14 +122,16 @@ Type 3
 |18|HookReturnCode|Hooks|n/a|
 |19|ReferenceCount|Hooks|n/a|
 
-## UINT128
+
+## HASH128
 Type 4
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
 |1|EmailHash|AccountSet|n/a|
 
-## UINT160
+
+## HASH160
 Type 17
 
 |Field Code|Field Name|Used by|Reserved by|
@@ -122,7 +141,8 @@ Type 17
 |3|TakerGetsCurrency|Offer|n/a|
 |4|TakerGetsIssuer|Offer|n/a|
 
-## UINT256
+
+## HASH256
 Type 5
 
 |Field Code|Field Name|Used by|Reserved by|
@@ -158,6 +178,7 @@ Type 5
 |32|HookNamespace|Hooks|n/a|
 |33|HookSetTxnID|Hooks|n/a|
 
+
 ## AMOUNT
 Type 6
 
@@ -177,13 +198,12 @@ Type 6
 |17|RippleEscrow|legacy/unused|n/a|
 |18|DeliveredAmount|Partial payments|n/a|
 |19|NFTokenBrokerFee|XLS20|n/a|
-|20|HookCallbackFee|Hooks|n/a|
-|21|LockedBalance|PaychanAndEscrowForTokens|n/a|
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
 
-## VL
+
+## BLOB
 Type 7
 
 |Field Code|Field Name|Used by|Reserved by|
@@ -213,8 +233,9 @@ Type 7
 |24|HookParameterName|Hooks|n/a|
 |25|HookParameterValue|Hooks|n/a|
 
-## Account Fields
-Type 8 
+
+## ACCOUNTID
+Type 8
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
@@ -229,8 +250,9 @@ Type 8
 |10|EmitCallback|Hooks|n/a|
 |16|HookAccount|Hooks|n/a|
 
+
 ## VECTOR256
-Type 5
+Type 19
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
@@ -239,6 +261,7 @@ Type 5
 |3|Amendments|Ledger|n/a|
 |4|NFTokenOffers|XLS20|n/a|
 
+
 ## PATHSET
 Type 18
 
@@ -246,7 +269,8 @@ Type 18
 |-|-|-|-|
 |1|Paths|Pathing|n/a|
 
-## OBJECT
+
+## STOBJECT
 Type 14
 
 |Field Code|Field Name|Used by|Reserved by|
@@ -274,7 +298,8 @@ Type 14
 |23|HookParameter|Hooks|n/a|
 |24|HookGrant|Hooks|n/a|
 
-## ARRAY
+
+## STARRAY
 Type 15
 
 |Field Code|Field Name|Used by|Reserved by|
@@ -294,3 +319,5 @@ Type 15
 |18|HookExecutions|Hooks|n/a|
 |19|HookParameters|Hooks|n/a|
 |20|HookGrants|Hooks|n/a|
+
+
