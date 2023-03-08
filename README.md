@@ -60,7 +60,7 @@ Type 2
 |23|BondAmount|legacy/unused|n/a|
 |24|LoadFee|Consensus|n/a|
 |25|OfferSequence|OfferCreate|n/a|
-|26|FirstLedgerSequence|negativeUNL, Hooks|n/a|
+|26|FirstLedgerSequence|negativeUNL|n/a|
 |27|LastLedgerSequence|All Txns|n/a|
 |28|TransactionIndex|Metadata|n/a|
 |29|OperationLimit|legacy/unused|n/a|
@@ -279,7 +279,7 @@ Type 15
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
-|1|<End of Array>|Arrays|n/a|
+|1|<EndOfArray>|Arrays|n/a|
 |3|Signers|Multisign|n/a|
 |4|SignerEntries|Multisign|n/a|
 |5|Template|Templating|n/a|
