@@ -6,6 +6,7 @@
             "2": "|2|TransactionType|Transaction|n/a|",
             "3": "|3|SignerWeight|Transaction|n/a|",
             "4": "|4|TransferFee|Transaction|n/a|",
+            "5": "|5|TradingFee|XLS30|n/a|",
             "16": "|16|Version|n/a|n/a|",
             "17": "|17|HookStateChangeCount|Hooks|n/a|",
             "18": "|18|HookEmitCount|Hooks|n/a|",
@@ -56,7 +57,9 @@
             "43": "|43|MintedNFTokens|XLS20|n/a|",
             "44": "|44|BurnedNFTokens|XLS20|n/a|",
             "45": "|45|HookStateCount|Hooks|n/a|",
-            "46": "|46|EmitGeneration|Hooks|n/a|"
+            "46": "|46|EmitGeneration|Hooks|n/a|",
+            "47": "|47|VoteWeight|XLS30|n/a|",
+            "48": "|48|DiscountedFee|XLS30|n/a|"
         },
         "UInt64": {
             "1": "|1|IndexNext|Directories|n/a|",
@@ -94,6 +97,7 @@
             "11": "|11|EmitParentTxnID|Hooks|n/a|",
             "12": "|12|EmitNonce|Hooks|n/a|",
             "13": "|13|EmitHookHash|Hooks|n/a|",
+            "14": "|14|AMMID|XLS30|n/a|",
             "16": "|16|BookDirectory|Directories|n/a|",
             "17": "|17|InvoiceID|Payment, Check|n/a|",
             "18": "|18|Nickname|legacy/unused|n/a|",
@@ -125,6 +129,9 @@
             "8": "|8|Fee|All Txns|n/a|",
             "9": "|9|SendMax|Partial payments|n/a|",
             "10": "|10|DeliverMin|Partial payments|n/a|",
+            "11": "|11|Amount2|XLS30|n/a|",
+            "12": "|12|BidMin|XLS30|n/a|",
+            "13": "|13|BidMax|XLS30|n/a|",
             "16": "|16|MinimumOffer|legacy/unused|n/a|",
             "17": "|17|RippleEscrow|legacy/unused|n/a|",
             "18": "|18|DeliveredAmount|Partial payments|n/a|",
@@ -132,6 +139,11 @@
             "22": "|22|BaseFeeDrops|FeeSettings|n/a|",
             "23": "|23|ReserveBaseDrops|FeeSettings|n/a|",
             "24": "|24|ReserveIncrementDrops|FeeSettings|n/a|",
+            "25": "|25|LPTokenOut|XLS30|n/a|",
+            "26": "|26|LPTokenIn|XLS30|n/a|",
+            "27": "|27|EPrice|XLS30|n/a|",
+            "28": "|28|Price|XLS30|n/a|",
+            "29": "|29|LPTokenBalance|XLS30|n/a|",
             "258": "|258|taker_gets_funded|v1.10.0|n/a|",
             "259": "|259|taker_pays_funded|v1.10.0|n/a|"
         },
@@ -171,6 +183,7 @@
             "8": "|8|RegularKey|AccountSet|n/a|",
             "9": "|9|NFTokenMinter|XLS20|n/a|",
             "10": "|10|EmitCallback|Hooks|n/a|",
+            "11": "|11|AMMAccount|XLS30|n/a|",
             "16": "|16|HookAccount|Hooks|n/a|"
         },
         "STObject": {
@@ -195,7 +208,10 @@
             "21": "|21|HookExecution|Hooks|n/a|",
             "22": "|22|HookDefinition|Hooks|n/a|",
             "23": "|23|HookParameter|Hooks|n/a|",
-            "24": "|24|HookGrant|Hooks|n/a|"
+            "24": "|24|HookGrant|Hooks|n/a|",
+            "25": "|25|VoteEntry|XLS30|n/a|",
+            "26": "|26|AuctionSlot|XLS30|n/a|",
+            "27": "|27|AuthAccount|XLS30|n/a|"
         },
         "STArray": {
             "1": "|1|ArrayEndMarker|Arrays|n/a|",
@@ -208,11 +224,13 @@
             "9": "|9|Memos|All Txn|n/a|",
             "10": "|10|NFTokens|XLS20|n/a|",
             "11": "|11|Hooks|Hooks|n/a|",
+            "12": "|12|VoteSlots|XLS30|n/a|",
             "16": "|16|Majorities|Consensus|n/a|",
             "17": "|17|DisabledValidators|negativeUNL|n/a|",
             "18": "|18|HookExecutions|Hooks|n/a|",
             "19": "|19|HookParameters|Hooks|n/a|",
-            "20": "|20|HookGrants|Hooks|n/a|"
+            "20": "|20|HookGrants|Hooks|n/a|",
+            "21": "|21|AuthAccounts|XLS30|n/a|"
         },
         "UInt8": {
             "1": "|1|CloseResolution|Consensus|n/a|",
@@ -240,7 +258,11 @@
         "UInt96": {},
         "UInt192": {},
         "UInt384": {},
-        "UInt512": {}
+        "UInt512": {},
+        "Issue": {
+            "3": "|3|Asset|XLS30|n/a|",
+            "4": "|4|Asset2|XLS30|n/a|"
+        }
     },
     "results": {
         "-399": "|-399|telLOCAL_ERROR|v1.10.0|n/a|",
@@ -294,6 +316,7 @@
         "-264": "|-264|temUNKNOWN|v1.10.0|n/a|",
         "-263": "|-263|temSEQ_AND_TICKET|v1.10.0|n/a|",
         "-262": "|-262|temBAD_NFTOKEN_TRANSFER_FEE|v1.10.0|n/a|",
+        "-261": "|-261|temAMM_BAD_TOKENS|XLS30|n/a|",
         "-199": "|-199|tefFAILURE|v1.10.0|n/a|",
         "-198": "|-198|tefALREADY|v1.10.0|n/a|",
         "-197": "|-197|tefBAD_ADD_AUTH|v1.10.0|n/a|",
@@ -327,6 +350,7 @@
         "-90": "|-90|terNO_RIPPLE|v1.10.0|n/a|",
         "-89": "|-89|terQUEUED|v1.10.0|n/a|",
         "-88": "|-88|terPRE_TICKET|v1.10.0|n/a|",
+        "-87": "|-87|terNO_AMM|XLS30|n/a|",
         "0": "|0|tesSUCCESS|v1.10.0|n/a|",
         "100": "|100|tecCLAIM|v1.10.0|n/a|",
         "101": "|101|tecPATH_PARTIAL|v1.10.0|n/a|",
@@ -374,6 +398,13 @@
         "158": "|158|tecCANT_ACCEPT_OWN_NFTOKEN_OFFER|v1.10.0|n/a|",
         "159": "|159|tecINSUFFICIENT_FUNDS|v1.10.0|n/a|",
         "160": "|160|tecOBJECT_NOT_FOUND|v1.10.0|n/a|",
-        "161": "|161|tecINSUFFICIENT_PAYMENT|v1.10.0|n/a|"
+        "161": "|161|tecINSUFFICIENT_PAYMENT|v1.10.0|n/a|",
+        "162": "|162|tecAMM_UNFUNDED|XLS30|n/a|",
+        "163": "|163|tecAMM_BALANCE|XLS30|n/a|",
+        "164": "|164|tecAMM_FAILED_DEPOSIT|XLS30|n/a|",
+        "165": "|165|tecAMM_FAILED_WITHDRAW|XLS30|n/a|",
+        "166": "|166|tecAMM_INVALID_TOKENS|XLS30|n/a|",
+        "167": "|167|tecAMM_FAILED_BID|XLS30|n/a|",
+        "168": "|168|tecAMM_FAILED_VOTE|XLS30|n/a|"
     }
 }
