@@ -34,6 +34,7 @@ Type 1
 |2|TransactionType|Transaction|n/a|
 |3|SignerWeight|Transaction|n/a|
 |4|TransferFee|Transaction|n/a|
+|5|TradingFee|XLS30|n/a|
 |16|Version|n/a|n/a|
 |17|HookStateChangeCount|Hooks|n/a|
 |18|HookEmitCount|Hooks|n/a|
@@ -90,6 +91,8 @@ Type 2
 |44|BurnedNFTokens|XLS20|n/a|
 |45|HookStateCount|Hooks|n/a|
 |46|EmitGeneration|Hooks|n/a|
+|47|VoteWeight|XLS30|n/a|
+|48|DiscountedFee|XLS30|n/a|
 
 
 ## UINT64
@@ -142,6 +145,7 @@ Type 5
 |11|EmitParentTxnID|Hooks|n/a|
 |12|EmitNonce|Hooks|n/a|
 |13|EmitHookHash|Hooks|n/a|
+|14|AMMID|XLS30|n/a|
 |16|BookDirectory|Directories|n/a|
 |17|InvoiceID|Payment, Check|n/a|
 |18|Nickname|legacy/unused|n/a|
@@ -178,6 +182,9 @@ Type 6
 |8|Fee|All Txns|n/a|
 |9|SendMax|Partial payments|n/a|
 |10|DeliverMin|Partial payments|n/a|
+|11|Amount2|XLS30|n/a|
+|12|BidMin|XLS30|n/a|
+|13|BidMax|XLS30|n/a|
 |16|MinimumOffer|legacy/unused|n/a|
 |17|RippleEscrow|legacy/unused|n/a|
 |18|DeliveredAmount|Partial payments|n/a|
@@ -185,6 +192,11 @@ Type 6
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
+|25|LPTokenOut|XLS30|n/a|
+|26|LPTokenIn|XLS30|n/a|
+|27|EPrice|XLS30|n/a|
+|28|Price|XLS30|n/a|
+|29|LPTokenBalance|XLS30|n/a|
 |258|taker_gets_funded|v1.10.0|n/a|
 |259|taker_pays_funded|v1.10.0|n/a|
 
@@ -234,6 +246,7 @@ Type 8
 |8|RegularKey|AccountSet|n/a|
 |9|NFTokenMinter|XLS20|n/a|
 |10|EmitCallback|Hooks|n/a|
+|11|AMMAccount|XLS30|n/a|
 |16|HookAccount|Hooks|n/a|
 
 
@@ -264,6 +277,9 @@ Type 14
 |22|HookDefinition|Hooks|n/a|
 |23|HookParameter|Hooks|n/a|
 |24|HookGrant|Hooks|n/a|
+|25|VoteEntry|XLS30|n/a|
+|26|AuctionSlot|XLS30|n/a|
+|27|AuthAccount|XLS30|n/a|
 
 
 ## STARRAY
@@ -281,11 +297,13 @@ Type 15
 |9|Memos|All Txn|n/a|
 |10|NFTokens|XLS20|n/a|
 |11|Hooks|Hooks|n/a|
+|12|VoteSlots|XLS30|n/a|
 |16|Majorities|Consensus|n/a|
 |17|DisabledValidators|negativeUNL|n/a|
 |18|HookExecutions|Hooks|n/a|
 |19|HookParameters|Hooks|n/a|
 |20|HookGrants|Hooks|n/a|
+|21|AuthAccounts|XLS30|n/a|
 
 
 ## UINT8
@@ -359,6 +377,15 @@ Type 23
 |-|-|-|-|
 
 
+## ISSUE
+Type 24
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|3|Asset|XLS30|n/a|
+|4|Asset2|XLS30|n/a|
+
+
 ## TRANSACTION RESULTS
 
 
@@ -415,6 +442,7 @@ Type 23
 |-264|temUNKNOWN|v1.10.0|n/a|
 |-263|temSEQ_AND_TICKET|v1.10.0|n/a|
 |-262|temBAD_NFTOKEN_TRANSFER_FEE|v1.10.0|n/a|
+|-261|temAMM_BAD_TOKENS|XLS30|n/a|
 |-199|tefFAILURE|v1.10.0|n/a|
 |-198|tefALREADY|v1.10.0|n/a|
 |-197|tefBAD_ADD_AUTH|v1.10.0|n/a|
@@ -448,6 +476,7 @@ Type 23
 |-90|terNO_RIPPLE|v1.10.0|n/a|
 |-89|terQUEUED|v1.10.0|n/a|
 |-88|terPRE_TICKET|v1.10.0|n/a|
+|-87|terNO_AMM|XLS30|n/a|
 |0|tesSUCCESS|v1.10.0|n/a|
 |100|tecCLAIM|v1.10.0|n/a|
 |101|tecPATH_PARTIAL|v1.10.0|n/a|
@@ -496,5 +525,12 @@ Type 23
 |159|tecINSUFFICIENT_FUNDS|v1.10.0|n/a|
 |160|tecOBJECT_NOT_FOUND|v1.10.0|n/a|
 |161|tecINSUFFICIENT_PAYMENT|v1.10.0|n/a|
+|162|tecAMM_UNFUNDED|XLS30|n/a|
+|163|tecAMM_BALANCE|XLS30|n/a|
+|164|tecAMM_FAILED_DEPOSIT|XLS30|n/a|
+|165|tecAMM_FAILED_WITHDRAW|XLS30|n/a|
+|166|tecAMM_INVALID_TOKENS|XLS30|n/a|
+|167|tecAMM_FAILED_BID|XLS30|n/a|
+|168|tecAMM_FAILED_VOTE|XLS30|n/a|
 
 
