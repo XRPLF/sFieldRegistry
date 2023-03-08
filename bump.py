@@ -67,7 +67,11 @@ def run(definitions: Dict[str, Any], name: str):
             if str(nth) not in get_list(tk, type_map):
                 new_type_map[tk][str(nth)] = f'|{nth}|{type}|{name}|n/a|'
             else:
-                new_type_map[tk][str(nth)] = type_map[tk][str(nth)]
+                old_type = type_map[tk][str(nth)].split('|')[2]
+                if old_type != type:
+                    new_type_map[tk][str(nth)] = f'|{nth}|{type}|{name}|n/a|'
+                else:
+                    new_type_map[tk][str(nth)] = type_map[tk][str(nth)]
 
     output_value: str = ''
     output_value: str = """
