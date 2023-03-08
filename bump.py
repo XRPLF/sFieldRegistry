@@ -80,7 +80,7 @@ def run(definitions: Dict[str, Any], name: str):
 
 ## Quick Bump
 
-You can use the quick bump if you already have the definitions file.
+You can use the quick bump if you already have the definitions file or a rippled build
 
 python3 bump.py | action | name | path
 
