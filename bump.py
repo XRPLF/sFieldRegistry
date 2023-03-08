@@ -3,6 +3,8 @@ import sys
 import json
 from typing import List, Dict, Any
 
+from gen import get_definitions
+
 
 def read_file(path: str):
     with open(path, 'r') as f:
@@ -41,7 +43,7 @@ IGNORE_LIST: List[str] = [
 
 
 def run(definitions: Dict[str, Any], name: str):
-    type_map: Dict[str, Any] = read_json('./map.json')
+    type_map: Dict[str, Any] = read_json('./map.json')['types']
     new_type_map: Dict[str, Any] = {}
     for tk, tv in definitions['TYPES'].items():
         if tk in IGNORE_LIST:
@@ -55,12 +57,6 @@ def run(definitions: Dict[str, Any], name: str):
             if tk != f[1]['type']:
                 continue
 
-            # PATCH FOR END OF OBJECT/ARRAY
-            if tk == 'STObject':
-                new_type_map[tk]["1"] = "|1|<EndOfObject>|Objects|n/a|"
-            if tk == 'STArray':
-                new_type_map[tk]["1"] = "|1|<EndOfArray>|Arrays|n/a|"
-
             new_type_map[tk][str(nth)] = {}
 
             # FIELDS
@@ -69,10 +65,25 @@ def run(definitions: Dict[str, Any], name: str):
             else:
                 old_type = type_map[tk][str(nth)].split('|')[2]
                 if old_type != type:
-                    new_type_map[tk][str(nth)] = f'|{nth}|{type}|{name}|n/a|'
+                    raise ValueError(f'`type` {type} merge conflict with {old_type} ')
+                    # new_type_map[tk][f'{nth}'] = f'|{nth}|{type}|{name}|n/a|'
                 else:
                     new_type_map[tk][str(nth)] = type_map[tk][str(nth)]
-
+    
+    result_map: Dict[str, Any] = read_json('./map.json')['results']
+    new_result_map: Dict[str, Any] = {}
+    for rk, rv in definitions['TRANSACTION_RESULTS'].items():
+        # TRANSACTION_RESULTS
+        if str(rv) not in result_map:
+            new_result_map[str(rv)] = f'|{rv}|{rk}|{name}|n/a|'
+        else:
+            old_result = result_map[str(rv)].split('|')[2]
+            if old_result != rk:
+                raise ValueError(f'`transaction result` {rk} merge conflict with {old_type}')
+                # new_result_map[str(rv)] = f'|{rv}|{rk}|{name}|n/a|'
+            else:
+                new_result_map[str(rv)] = result_map[str(rv)]
+    
     output_value: str = ''
     output_value: str = """
 # SFCode Registry Tables
@@ -117,128 +128,25 @@ This will update the `README.md` and the `map.json` file.
 
         new_type_map[k] = sorted_fields
 
+    output_value += f'## TRANSACTION RESULTS' + '\n'
+    output_value += '\n'
+    for k, v in new_result_map.items():
+        output_value += v
+        output_value += '\n'
+        v = None
+
+    output_value += '\n'
+    output_value += '\n'
+
     write_file('./README.md', output_value)
-    write_json('./map.json', new_type_map)
-
-
-def type_v_lookup(v: str):
-    if v == 'UINT8':
-        return 'UInt8'
-    if v == 'UINT16':
-        return 'UInt16'
-    if v == 'UINT32':
-        return 'UInt32'
-    if v == 'UINT64':
-        return 'UInt64'
-    if v == 'UINT128':
-        return 'Hash128'
-    if v == 'UINT160':
-        return 'Hash160'
-    if v == 'UINT256':
-        return 'Hash256'
-    if v == 'AMOUNT':
-        return 'Amount'
-    if v == 'VL':
-        return 'Blob'
-    if v == 'ACCOUNT':
-        return 'AccountID'
-    if v == 'VECTOR256':
-        return 'Vector256'
-    if v == 'PATHSET':
-        return 'PathSet'
-    if v == 'OBJECT':
-        return 'STObject'
-    if v == 'ARRAY':
-        return 'STArray'
-    if v == 'LEDGERENTRY':
-        return 'LedgerEntry'
-    if v == 'TRANSACTION':
-        return 'Transaction'
-    if v == 'VALIDATION':
-        return 'Validation'
-    if v == 'METADATA':
-        return 'Metadata'
-
-
-def num_v_lookup(v: str):
-    if v == 'UINT8':
-        return 16
-    if v == 'UINT16':
-        return 1
-    if v == 'UINT32':
-        return 2
-    if v == 'UINT64':
-        return 3
-    if v == 'UINT128':
-        return 4
-    if v == 'UINT160':
-        return 17
-    if v == 'UINT256':
-        return 5
-    if v == 'AMOUNT':
-        return 6
-    if v == 'VL':
-        return 7
-    if v == 'ACCOUNT':
-        return 8
-    if v == 'VECTOR256':
-        return 19
-    if v == 'PATHSET':
-        return 18
-    if v == 'OBJECT':
-        return 14
-    if v == 'ARRAY':
-        return 15
-    if v == 'LEDGERENTRY':
-        return 10002
-    if v == 'TRANSACTION':
-        return 10001
-    if v == 'VALIDATION':
-        return 10003
-    if v == 'METADATA':
-        return 10004
-
+    write_json('./map.json', {
+        "types": new_type_map,
+        "results": new_result_map,
+    })
 
 def run_rippled(path: str, amendment: str):
     # create an empty dictionary
-    definitions = {}
-    definitions["TYPES"] = {}
-    definitions["FIELDS"] = {}
-
-    # open the cpp file
-    with open(path) as f:
-        # loop over each line
-        fields: List[Dict[str, Any]] = []
-        for line in f.readlines():
-            line = line.strip()
-            line = line.replace('"', '')
-            line = line.replace("'", '')
-            line = line.replace(");", '')
-            if line.startswith("CONSTRUCT_UNTYPED_SFIELD"):
-                line = line.replace("CONSTRUCT_UNTYPED_SFIELD(", '')
-                line_parts = line.split(",")
-                sf_type: str = line_parts[1].strip()
-                name: str = type_v_lookup(line_parts[2].strip())
-                value: str = line_parts[3].strip()
-                def_arr = [sf_type, {"nth": int(value), "type": name}]
-                fields.append(def_arr)
-                if name not in definitions["TYPES"]:
-                    definitions["TYPES"][f"{name}"] = num_v_lookup(
-                        line_parts[2].strip())
-            elif line.startswith("CONSTRUCT_TYPED_SFIELD"):
-                line = line.replace("CONSTRUCT_TYPED_SFIELD(", '')
-                line_parts = line.split(",")
-                sf_type: str = line_parts[1].strip()
-                name: str = type_v_lookup(line_parts[2].strip())
-                value: str = line_parts[3].strip()
-                def_arr = [sf_type, {"nth": int(value), "type": name}]
-                fields.append(def_arr)
-                if name not in definitions["TYPES"]:
-                    definitions["TYPES"][f"{name}"] = num_v_lookup(
-                        line_parts[2].strip())
-
-        definitions["FIELDS"] = fields
-
+    definitions = get_definitions(path)
     # return the cpp_map
     run(definitions, amendment)
 
@@ -267,7 +175,7 @@ if __name__ == "__main__":
             definitions: Dict[str, Any] = read_json(path)
             run(definitions, amendment)
         if action == 'rippled':
-            r_path: str = path + '/src/ripple/protocol/impl/SField.cpp'
+            r_path: str = path + '/src/ripple'
             run_rippled(r_path, amendment)
     except Exception as e:
         print(e)
