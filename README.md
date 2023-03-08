@@ -19,17 +19,11 @@ This will update the `README.md` and the `map.json` file.
 
 3. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
-## UINT8
-Type 16
+## NOTPRESENT
+Type 0
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
-|1|CloseResolution|Consensus|n/a|
-|2|Method|legacy/unused|n/a|
-|3|TransactionResult|Metadata|n/a|
-|16|TickSize|Orderbooks|n/a|
-|17|UNLModifyDisabling|negativeUNL|n/a|
-|18|HookResult|Hooks|n/a|
 
 
 ## UINT16
@@ -131,17 +125,6 @@ Type 4
 |1|EmailHash|AccountSet|n/a|
 
 
-## HASH160
-Type 17
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-|1|TakerPaysCurrency|Offer|n/a|
-|2|TakerPaysIssuer|Offer|n/a|
-|3|TakerGetsCurrency|Offer|n/a|
-|4|TakerGetsIssuer|Offer|n/a|
-
-
 ## HASH256
 Type 5
 
@@ -177,6 +160,8 @@ Type 5
 |31|HookHash|Hooks|n/a|
 |32|HookNamespace|Hooks|n/a|
 |33|HookSetTxnID|Hooks|n/a|
+|257|hash|v1.10.0|n/a|
+|258|index|v1.10.0|n/a|
 
 
 ## AMOUNT
@@ -201,6 +186,8 @@ Type 6
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
+|258|taker_gets_funded|v1.10.0|n/a|
+|259|taker_pays_funded|v1.10.0|n/a|
 
 
 ## BLOB
@@ -251,31 +238,12 @@ Type 8
 |16|HookAccount|Hooks|n/a|
 
 
-## VECTOR256
-Type 19
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-|1|Indexes|Ledger|n/a|
-|2|Hashes|Ledger|n/a|
-|3|Amendments|Ledger|n/a|
-|4|NFTokenOffers|XLS20|n/a|
-
-
-## PATHSET
-Type 18
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-|1|Paths|Pathing|n/a|
-
-
 ## STOBJECT
 Type 14
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
-|1|<EndOfObject>|Objects|n/a|
+|1|ObjectEndMarker|Objects|n/a|
 |2|TransactionMetaData|Metadata|n/a|
 |3|CreatedNode|Metadata|n/a|
 |4|DeletedNode|Metadata|n/a|
@@ -304,7 +272,7 @@ Type 15
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
-|1|<EndOfArray>|Arrays|n/a|
+|1|ArrayEndMarker|Arrays|n/a|
 |3|Signers|Multisign|n/a|
 |4|SignerEntries|Multisign|n/a|
 |5|Template|Templating|n/a|
@@ -319,5 +287,212 @@ Type 15
 |18|HookExecutions|Hooks|n/a|
 |19|HookParameters|Hooks|n/a|
 |20|HookGrants|Hooks|n/a|
+
+
+## UINT8
+Type 16
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|1|CloseResolution|Consensus|n/a|
+|2|Method|legacy/unused|n/a|
+|3|TransactionResult|Metadata|n/a|
+|16|TickSize|Orderbooks|n/a|
+|17|UNLModifyDisabling|negativeUNL|n/a|
+|18|HookResult|Hooks|n/a|
+
+
+## HASH160
+Type 17
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|1|TakerPaysCurrency|Offer|n/a|
+|2|TakerPaysIssuer|Offer|n/a|
+|3|TakerGetsCurrency|Offer|n/a|
+|4|TakerGetsIssuer|Offer|n/a|
+
+
+## PATHSET
+Type 18
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|1|Paths|Pathing|n/a|
+
+
+## VECTOR256
+Type 19
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|1|Indexes|Ledger|n/a|
+|2|Hashes|Ledger|n/a|
+|3|Amendments|Ledger|n/a|
+|4|NFTokenOffers|XLS20|n/a|
+
+
+## UINT96
+Type 20
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+
+
+## UINT192
+Type 21
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+
+
+## UINT384
+Type 22
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+
+
+## UINT512
+Type 23
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+
+
+## TRANSACTION RESULTS
+
+|-399|telLOCAL_ERROR|v1.10.0|n/a|
+|-398|telBAD_DOMAIN|v1.10.0|n/a|
+|-397|telBAD_PATH_COUNT|v1.10.0|n/a|
+|-396|telBAD_PUBLIC_KEY|v1.10.0|n/a|
+|-395|telFAILED_PROCESSING|v1.10.0|n/a|
+|-394|telINSUF_FEE_P|v1.10.0|n/a|
+|-393|telNO_DST_PARTIAL|v1.10.0|n/a|
+|-392|telCAN_NOT_QUEUE|v1.10.0|n/a|
+|-391|telCAN_NOT_QUEUE_BALANCE|v1.10.0|n/a|
+|-390|telCAN_NOT_QUEUE_BLOCKS|v1.10.0|n/a|
+|-389|telCAN_NOT_QUEUE_BLOCKED|v1.10.0|n/a|
+|-388|telCAN_NOT_QUEUE_FEE|v1.10.0|n/a|
+|-387|telCAN_NOT_QUEUE_FULL|v1.10.0|n/a|
+|-299|temMALFORMED|v1.10.0|n/a|
+|-298|temBAD_AMOUNT|v1.10.0|n/a|
+|-297|temBAD_CURRENCY|v1.10.0|n/a|
+|-296|temBAD_EXPIRATION|v1.10.0|n/a|
+|-295|temBAD_FEE|v1.10.0|n/a|
+|-294|temBAD_ISSUER|v1.10.0|n/a|
+|-293|temBAD_LIMIT|v1.10.0|n/a|
+|-292|temBAD_OFFER|v1.10.0|n/a|
+|-291|temBAD_PATH|v1.10.0|n/a|
+|-290|temBAD_PATH_LOOP|v1.10.0|n/a|
+|-289|temBAD_REGKEY|v1.10.0|n/a|
+|-288|temBAD_SEND_XRP_LIMIT|v1.10.0|n/a|
+|-287|temBAD_SEND_XRP_MAX|v1.10.0|n/a|
+|-286|temBAD_SEND_XRP_NO_DIRECT|v1.10.0|n/a|
+|-285|temBAD_SEND_XRP_PARTIAL|v1.10.0|n/a|
+|-284|temBAD_SEND_XRP_PATHS|v1.10.0|n/a|
+|-283|temBAD_SEQUENCE|v1.10.0|n/a|
+|-282|temBAD_SIGNATURE|v1.10.0|n/a|
+|-281|temBAD_SRC_ACCOUNT|v1.10.0|n/a|
+|-280|temBAD_TRANSFER_RATE|v1.10.0|n/a|
+|-279|temDST_IS_SRC|v1.10.0|n/a|
+|-278|temDST_NEEDED|v1.10.0|n/a|
+|-277|temINVALID|v1.10.0|n/a|
+|-276|temINVALID_FLAG|v1.10.0|n/a|
+|-275|temREDUNDANT|v1.10.0|n/a|
+|-274|temRIPPLE_EMPTY|v1.10.0|n/a|
+|-273|temDISABLED|v1.10.0|n/a|
+|-272|temBAD_SIGNER|v1.10.0|n/a|
+|-271|temBAD_QUORUM|v1.10.0|n/a|
+|-270|temBAD_WEIGHT|v1.10.0|n/a|
+|-269|temBAD_TICK_SIZE|v1.10.0|n/a|
+|-268|temINVALID_ACCOUNT_ID|v1.10.0|n/a|
+|-267|temCANNOT_PREAUTH_SELF|v1.10.0|n/a|
+|-266|temINVALID_COUNT|v1.10.0|n/a|
+|-265|temUNCERTAIN|v1.10.0|n/a|
+|-264|temUNKNOWN|v1.10.0|n/a|
+|-263|temSEQ_AND_TICKET|v1.10.0|n/a|
+|-262|temBAD_NFTOKEN_TRANSFER_FEE|v1.10.0|n/a|
+|-199|tefFAILURE|v1.10.0|n/a|
+|-198|tefALREADY|v1.10.0|n/a|
+|-197|tefBAD_ADD_AUTH|v1.10.0|n/a|
+|-196|tefBAD_AUTH|v1.10.0|n/a|
+|-195|tefBAD_LEDGER|v1.10.0|n/a|
+|-194|tefCREATED|v1.10.0|n/a|
+|-193|tefEXCEPTION|v1.10.0|n/a|
+|-192|tefINTERNAL|v1.10.0|n/a|
+|-191|tefNO_AUTH_REQUIRED|v1.10.0|n/a|
+|-190|tefPAST_SEQ|v1.10.0|n/a|
+|-189|tefWRONG_PRIOR|v1.10.0|n/a|
+|-188|tefMASTER_DISABLED|v1.10.0|n/a|
+|-187|tefMAX_LEDGER|v1.10.0|n/a|
+|-186|tefBAD_SIGNATURE|v1.10.0|n/a|
+|-185|tefBAD_QUORUM|v1.10.0|n/a|
+|-184|tefNOT_MULTI_SIGNING|v1.10.0|n/a|
+|-183|tefBAD_AUTH_MASTER|v1.10.0|n/a|
+|-182|tefINVARIANT_FAILED|v1.10.0|n/a|
+|-181|tefTOO_BIG|v1.10.0|n/a|
+|-180|tefNO_TICKET|v1.10.0|n/a|
+|-179|tefNFTOKEN_IS_NOT_TRANSFERABLE|v1.10.0|n/a|
+|-99|terRETRY|v1.10.0|n/a|
+|-98|terFUNDS_SPENT|v1.10.0|n/a|
+|-97|terINSUF_FEE_B|v1.10.0|n/a|
+|-96|terNO_ACCOUNT|v1.10.0|n/a|
+|-95|terNO_AUTH|v1.10.0|n/a|
+|-94|terNO_LINE|v1.10.0|n/a|
+|-93|terOWNERS|v1.10.0|n/a|
+|-92|terPRE_SEQ|v1.10.0|n/a|
+|-91|terLAST|v1.10.0|n/a|
+|-90|terNO_RIPPLE|v1.10.0|n/a|
+|-89|terQUEUED|v1.10.0|n/a|
+|-88|terPRE_TICKET|v1.10.0|n/a|
+|0|tesSUCCESS|v1.10.0|n/a|
+|100|tecCLAIM|v1.10.0|n/a|
+|101|tecPATH_PARTIAL|v1.10.0|n/a|
+|102|tecUNFUNDED_ADD|v1.10.0|n/a|
+|103|tecUNFUNDED_OFFER|v1.10.0|n/a|
+|104|tecUNFUNDED_PAYMENT|v1.10.0|n/a|
+|105|tecFAILED_PROCESSING|v1.10.0|n/a|
+|121|tecDIR_FULL|v1.10.0|n/a|
+|122|tecINSUF_RESERVE_LINE|v1.10.0|n/a|
+|123|tecINSUF_RESERVE_OFFER|v1.10.0|n/a|
+|124|tecNO_DST|v1.10.0|n/a|
+|125|tecNO_DST_INSUF_XRP|v1.10.0|n/a|
+|126|tecNO_LINE_INSUF_RESERVE|v1.10.0|n/a|
+|127|tecNO_LINE_REDUNDANT|v1.10.0|n/a|
+|128|tecPATH_DRY|v1.10.0|n/a|
+|129|tecUNFUNDED|v1.10.0|n/a|
+|130|tecNO_ALTERNATIVE_KEY|v1.10.0|n/a|
+|131|tecNO_REGULAR_KEY|v1.10.0|n/a|
+|132|tecOWNERS|v1.10.0|n/a|
+|133|tecNO_ISSUER|v1.10.0|n/a|
+|134|tecNO_AUTH|v1.10.0|n/a|
+|135|tecNO_LINE|v1.10.0|n/a|
+|136|tecINSUFF_FEE|v1.10.0|n/a|
+|137|tecFROZEN|v1.10.0|n/a|
+|138|tecNO_TARGET|v1.10.0|n/a|
+|139|tecNO_PERMISSION|v1.10.0|n/a|
+|140|tecNO_ENTRY|v1.10.0|n/a|
+|141|tecINSUFFICIENT_RESERVE|v1.10.0|n/a|
+|142|tecNEED_MASTER_KEY|v1.10.0|n/a|
+|143|tecDST_TAG_NEEDED|v1.10.0|n/a|
+|144|tecINTERNAL|v1.10.0|n/a|
+|145|tecOVERSIZE|v1.10.0|n/a|
+|146|tecCRYPTOCONDITION_ERROR|v1.10.0|n/a|
+|147|tecINVARIANT_FAILED|v1.10.0|n/a|
+|148|tecEXPIRED|v1.10.0|n/a|
+|149|tecDUPLICATE|v1.10.0|n/a|
+|150|tecKILLED|v1.10.0|n/a|
+|151|tecHAS_OBLIGATIONS|v1.10.0|n/a|
+|152|tecTOO_SOON|v1.10.0|n/a|
+|153|tecHOOK_ERROR|v1.10.0|n/a|
+|154|tecMAX_SEQUENCE_REACHED|v1.10.0|n/a|
+|155|tecNO_SUITABLE_NFTOKEN_PAGE|v1.10.0|n/a|
+|156|tecNFTOKEN_BUY_SELL_MISMATCH|v1.10.0|n/a|
+|157|tecNFTOKEN_OFFER_TYPE_MISMATCH|v1.10.0|n/a|
+|158|tecCANT_ACCEPT_OWN_NFTOKEN_OFFER|v1.10.0|n/a|
+|159|tecINSUFFICIENT_FUNDS|v1.10.0|n/a|
+|160|tecOBJECT_NOT_FOUND|v1.10.0|n/a|
+|161|tecINSUFFICIENT_PAYMENT|v1.10.0|n/a|
 
 
