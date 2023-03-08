@@ -94,16 +94,16 @@ def run(definitions: Dict[str, Any], name: str):
 2. Register by opening a PR against this repo with your proposed registration as changes to the tables below. Provided the reservations are reasonable these will be accepted.
 3. If your code is already in use then enter it into the `used by` column otherwise use the `reserved by` column. Be descriptive but terse in the `reserved by` field. Other developers should understand why this code is being reserved.
 
-## Quick Bump
+## Bump Script
 
-You can use the quick bump if you already have the definitions file or a rippled build
+You can use the bump script if you already have the definitions file or a rippled build
 
 python3 bump.py | action | name | path
 
-`python3 bump.py definitions Hooks ./definitions.json`
-`python3 bump.py rippled Hooks ./rippled`
+- `python3 bump.py definitions Hooks ./definitions.json`
+- `python3 bump.py rippled Hooks ./rippled`
 
-This will update the `README.md` and the `map.json` file.
+> This will update the `README.md` and the `map.json` file.
 
 """
     for k, v in new_type_map.items():
