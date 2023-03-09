@@ -18,13 +18,6 @@ python3 bump.py | action | name | path
 
 > This will update the `README.md` and the `map.json` file.
 
-## NOTPRESENT
-Type 0
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-
-
 ## UINT16
 Type 1
 
@@ -347,34 +340,6 @@ Type 19
 |2|Hashes|Ledger|n/a|
 |3|Amendments|Ledger|n/a|
 |4|NFTokenOffers|XLS20|n/a|
-
-
-## UINT96
-Type 20
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-
-
-## UINT192
-Type 21
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-
-
-## UINT384
-Type 22
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
-
-
-## UINT512
-Type 23
-
-|Field Code|Field Name|Used by|Reserved by|
-|-|-|-|-|
 
 
 ## ISSUE

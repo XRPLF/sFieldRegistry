@@ -141,6 +141,8 @@ python3 bump.py | action | name | path
 
 """
     for k, v in new_type_map.items():
+        if len(v.items()) == 0:
+            continue
         type_nth: str = types[k]
         output_value += f'## {k.upper()}'
         output_value += '\n'
