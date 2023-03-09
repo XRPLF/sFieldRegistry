@@ -199,9 +199,9 @@ Type 6
 |27|EPrice|XLS30|n/a|
 |28|Price|XLS30|n/a|
 |29|LPTokenBalance|XLS30|n/a|
-|31|LockedBalance|XLS34|n/a|
-|32|SignatureReward|XLS38|n/a|
-|33|MinAccountCreateAmount|XLS38|n/a|
+|30|SignatureReward|XLS38|n/a|
+|31|MinAccountCreateAmount|XLS38|n/a|
+|32|LockedBalance|XLS34|n/a|
 |258|taker_gets_funded|v1.10.0|n/a|
 |259|taker_pays_funded|v1.10.0|n/a|
 
@@ -291,10 +291,10 @@ Type 14
 |25|VoteEntry|XLS30|n/a|
 |26|AuctionSlot|XLS30|n/a|
 |27|AuthAccount|XLS30|n/a|
-|32|XChainClaimProofSig|XLS38|n/a|
-|33|XChainCreateAccountProofSig|XLS38|n/a|
-|34|XChainClaimAttestationBatchElement|XLS38|n/a|
-|35|XChainCreateAccountAttestationBatchElement|XLS38|n/a|
+|28|XChainClaimProofSig|XLS38|n/a|
+|29|XChainCreateAccountProofSig|XLS38|n/a|
+|30|XChainClaimAttestationBatchElement|XLS38|n/a|
+|31|XChainCreateAccountAttestationBatchElement|XLS38|n/a|
 
 
 ## STARRAY
@@ -378,6 +378,14 @@ Type 24
 |2|IssuingChainIssue|XLS38|n/a|
 |3|Asset|XLS30|n/a|
 |4|Asset2|XLS30|n/a|
+
+
+## XCHAINBRIDGE
+Type 25
+
+|Field Code|Field Name|Used by|Reserved by|
+|-|-|-|-|
+|1|XChainBridge|XLS38|n/a|
 
 
 ## TRANSACTION RESULTS
@@ -553,6 +561,6 @@ Type 24
 |183|tecXCHAIN_SELF_COMMIT|XLS38|n/a|
 |184|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|
 |185|tecXCHAIN_CREATE_ACCOUNT_DISABLED|XLS38|n/a|
-|187|tecPRECISION_LOSS|XLS34|n/a|
+|186|tecPRECISION_LOSS|XLS34|n/a|
 
 
