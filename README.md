@@ -115,6 +115,9 @@ Type 3
 |17|HookInstructionCount|Hooks|n/a|
 |18|HookReturnCode|Hooks|n/a|
 |19|ReferenceCount|Hooks|n/a|
+|20|XChainClaimID|XLS38|n/a|
+|21|XChainAccountCreateCount|XLS38|n/a|
+|22|XChainAccountClaimCount|XLS38|n/a|
 
 
 ## HASH128
@@ -197,6 +200,8 @@ Type 6
 |28|Price|XLS30|n/a|
 |29|LPTokenBalance|XLS30|n/a|
 |31|LockedBalance|XLS34|n/a|
+|32|SignatureReward|XLS38|n/a|
+|33|MinAccountCreateAmount|XLS38|n/a|
 |258|taker_gets_funded|v1.10.0|n/a|
 |259|taker_pays_funded|v1.10.0|n/a|
 
@@ -248,6 +253,12 @@ Type 8
 |10|EmitCallback|Hooks|n/a|
 |11|AMMAccount|XLS30|n/a|
 |16|HookAccount|Hooks|n/a|
+|18|OtherChainSource|XLS38|n/a|
+|19|OtherChainDestination|XLS38|n/a|
+|20|AttestationSignerAccount|XLS38|n/a|
+|21|AttestationRewardAccount|XLS38|n/a|
+|22|LockingChainDoor|XLS38|n/a|
+|23|IssuingChainDoor|XLS38|n/a|
 
 
 ## STOBJECT
@@ -280,6 +291,10 @@ Type 14
 |25|VoteEntry|XLS30|n/a|
 |26|AuctionSlot|XLS30|n/a|
 |27|AuthAccount|XLS30|n/a|
+|32|XChainClaimProofSig|XLS38|n/a|
+|33|XChainCreateAccountProofSig|XLS38|n/a|
+|34|XChainClaimAttestationBatchElement|XLS38|n/a|
+|35|XChainCreateAccountAttestationBatchElement|XLS38|n/a|
 
 
 ## STARRAY
@@ -304,6 +319,10 @@ Type 15
 |19|HookParameters|Hooks|n/a|
 |20|HookGrants|Hooks|n/a|
 |21|AuthAccounts|XLS30|n/a|
+|22|XChainClaimAttestationBatch|XLS38|n/a|
+|23|XChainCreateAccountAttestationBatch|XLS38|n/a|
+|24|XChainClaimAttestations|XLS38|n/a|
+|25|XChainCreateAccountAttestations|XLS38|n/a|
 
 
 ## UINT8
@@ -317,6 +336,7 @@ Type 16
 |16|TickSize|Orderbooks|n/a|
 |17|UNLModifyDisabling|negativeUNL|n/a|
 |18|HookResult|Hooks|n/a|
+|19|WasLockingChainSend|XLS38|n/a|
 
 
 ## HASH160
@@ -354,6 +374,8 @@ Type 24
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
+|1|LockingChainIssue|XLS38|n/a|
+|2|IssuingChainIssue|XLS38|n/a|
 |3|Asset|XLS30|n/a|
 |4|Asset2|XLS30|n/a|
 
@@ -418,6 +440,13 @@ Type 24
 |-263|temSEQ_AND_TICKET|v1.10.0|n/a|
 |-262|temBAD_NFTOKEN_TRANSFER_FEE|v1.10.0|n/a|
 |-261|temAMM_BAD_TOKENS|XLS30|n/a|
+|-260|temEQUAL_DOOR_ACCOUNTS|XLS38|n/a|
+|-259|temBAD_XCHAIN_PROOF|XLS38|n/a|
+|-258|temBRIDGE_BAD_ISSUES|XLS38|n/a|
+|-257|tem_BRIDGE_NONDOOR_OWNER|XLS38|n/a|
+|-256|temXCHAIN_BRIDGE_BAD_MIN_ACCOUNT_CREATE_AMOUNT|XLS38|n/a|
+|-255|temXCHAIN_BRIDGE_BAD_REWARD_AMOUNT|XLS38|n/a|
+|-254|temXCHAIN_TOO_MANY_ATTESTATIONS|XLS38|n/a|
 |-199|tefFAILURE|v1.10.0|n/a|
 |-198|tefALREADY|v1.10.0|n/a|
 |-197|tefBAD_ADD_AUTH|v1.10.0|n/a|
@@ -507,6 +536,23 @@ Type 24
 |166|tecAMM_INVALID_TOKENS|XLS30|n/a|
 |167|tecAMM_FAILED_BID|XLS30|n/a|
 |168|tecAMM_FAILED_VOTE|XLS30|n/a|
+|169|tecBAD_XCHAIN_TRANSFER_ISSUE|XLS38|n/a|
+|170|tecXCHAIN_NO_CLAIM_ID|XLS38|n/a|
+|171|tecXCHAIN_BAD_CLAIM_ID|XLS38|n/a|
+|172|tecXCHAIN_CLAIM_NO_QUORUM|XLS38|n/a|
+|173|tecXCHAIN_PROOF_UNKNOWN_KEY|XLS38|n/a|
+|174|tecXCHAIN_CREATE_ACCOUNT_NONXRP_ISSUE|XLS38|n/a|
+|175|tecXCHAIN_WRONG_CHAIN|XLS38|n/a|
+|176|tecXCHAIN_REWARD_MISMATCH|XLS38|n/a|
+|177|tecXCHAIN_NO_SIGNERS_LIST|XLS38|n/a|
+|178|tecXCHAIN_SENDING_ACCOUNT_MISMATCH|XLS38|n/a|
+|179|tecXCHAIN_INSUFF_CREATE_AMOUNT|XLS38|n/a|
+|180|tecXCHAIN_ACCOUNT_CREATE_PAST|XLS38|n/a|
+|181|tecXCHAIN_ACCOUNT_CREATE_TOO_MANY|XLS38|n/a|
+|182|tecXCHAIN_PAYMENT_FAILED|XLS38|n/a|
+|183|tecXCHAIN_SELF_COMMIT|XLS38|n/a|
+|184|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|
+|185|tecXCHAIN_CREATE_ACCOUNT_DISABLED|XLS38|n/a|
 |187|tecPRECISION_LOSS|XLS34|n/a|
 
 
