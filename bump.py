@@ -1,4 +1,5 @@
 
+import os
 import sys
 import json
 from typing import List, Dict, Any
@@ -26,9 +27,9 @@ def write_json(path: str, data: Dict[str, Any]):
         json.dump(data, json_file, indent=4)
 
 
-def get_list(tk: str, type_map: Dict[str, Any]):
-    if tk in type_map:
-        return [str(k) for k, _ in type_map[tk].items()]
+def get_list(tk: str, data: Dict[str, Any]):
+    if tk in data:
+        return [str(k) for k, _ in data[tk].items()]
     return []
 
 
@@ -41,36 +42,60 @@ IGNORE_LIST: List[str] = [
     'Metadata'
 ]
 
-
-def run(definitions: Dict[str, Any], name: str):
-    type_map: Dict[str, Any] = read_json('./map.json')['types']
+def run(definitions: Dict[str, Any], name: str, is_reset: bool = False):
+    types: Dict[str, Any] = read_json('./map.json')['types']
+    type_map: Dict[str, Any] = read_json('./map.json')['type_map']
     new_type_map: Dict[str, Any] = {}
     for tk, tv in definitions['TYPES'].items():
         if tk in IGNORE_LIST:
             continue
+
         new_type_map[tk] = {}
+        try:
+            type_map[tk]
+        except Exception as e:
+            types[tk] = tv
+            print(f'TYPE ADDED: {e}')
+        
         if tk not in [k for k, _ in type_map.items()]:
             continue
+
+        # definitions to map
         for f in definitions['FIELDS']:
             type: str = f[0]
             nth: str = f[1]['nth']
+
             if tk != f[1]['type']:
                 continue
 
             new_type_map[tk][str(nth)] = {}
 
-            # FIELDS
             if str(nth) not in get_list(tk, type_map):
                 new_type_map[tk][str(nth)] = f'|{nth}|{type}|{name}|n/a|'
             else:
                 old_type = type_map[tk][str(nth)].split('|')[2]
                 if old_type != type:
-                    raise ValueError(f'`type` {type} merge conflict with {old_type} ')
+                    raise ValueError(f'`Merge conflict with TYPES` {type} -> {old_type}. Both use nth: {nth}.')
                     # new_type_map[tk][f'{nth}'] = f'|{nth}|{type}|{name}|n/a|'
                 else:
                     new_type_map[tk][str(nth)] = type_map[tk][str(nth)]
-    
-    result_map: Dict[str, Any] = read_json('./map.json')['results']
+
+        # map to map
+        if not is_reset:
+            for k, _ in type_map[tk].items():
+                if str(k) not in get_list(tk, new_type_map):
+                    old_type = type_map[tk][str(k)].split('|')[2]
+                    old_amendment = type_map[tk][str(k)].split('|')[3]
+                    print(f'MISSING FIELD: {tk} - {old_type} - {k} - {old_amendment}')
+                    new_type_map[tk][str(k)] = type_map[tk][str(k)]
+
+    if not is_reset:
+        for k, _ in type_map.items():
+            if str(k) not in new_type_map:
+                print(f'MISSING TYPE: {k}')
+                new_type_map[str(k)] = type_map[str(k)]
+
+    result_map: Dict[str, Any] = read_json('./map.json')['result_map']
     new_result_map: Dict[str, Any] = {}
     for rk, rv in definitions['TRANSACTION_RESULTS'].items():
         # TRANSACTION_RESULTS
@@ -79,10 +104,19 @@ def run(definitions: Dict[str, Any], name: str):
         else:
             old_result = result_map[str(rv)].split('|')[2]
             if old_result != rk:
-                raise ValueError(f'`transaction result` {rk} merge conflict with {old_type}')
+                raise ValueError(f'`Merge conflict with TRANSACTION_RESULTS` {rk} -> {old_result}. Both use nth: {rv}.')
                 # new_result_map[str(rv)] = f'|{rv}|{rk}|{name}|n/a|'
             else:
                 new_result_map[str(rv)] = result_map[str(rv)]
+    
+    # map to map
+    if not is_reset:
+        for k, _ in result_map.items():
+            if str(k) not in new_result_map:
+                old_result = result_map[str(k)].split('|')[2]
+                old_amendment = result_map[str(k)].split('|')[3]
+                print(f'MISSING TRANSACTION RESULT: {old_result} - {k} - {old_amendment}')
+                new_result_map[str(k)] = result_map[str(k)]
     
     output_value: str = ''
     output_value: str = """
@@ -107,7 +141,7 @@ python3 bump.py | action | name | path
 
 """
     for k, v in new_type_map.items():
-        type_nth: str = definitions['TYPES'][k]
+        type_nth: str = types[k]
         output_value += f'## {k.upper()}'
         output_value += '\n'
         output_value += f'Type {type_nth}'
@@ -133,7 +167,8 @@ python3 bump.py | action | name | path
 |Response Code|Response Name|Used by|Reserved by|
 |-|-|-|-|
 """
-    for k, v in new_result_map.items():
+    sorted_results = {k: v for k, v in sorted(new_result_map.items(), key=lambda item: int(item[0]))}
+    for k, v in sorted_results.items():
         output_value += v
         output_value += '\n'
         v = None
@@ -143,16 +178,10 @@ python3 bump.py | action | name | path
 
     write_file('./README.md', output_value)
     write_json('./map.json', {
-        "types": new_type_map,
-        "results": new_result_map,
+        "types": types,
+        "type_map": new_type_map,
+        "result_map": sorted_results,
     })
-
-def run_rippled(path: str, amendment: str):
-    # create an empty dictionary
-    definitions = get_definitions(path)
-    # return the cpp_map
-    run(definitions, amendment)
-
 
 action_list: List[str] = ['definitions', 'rippled']
 if __name__ == "__main__":
@@ -173,12 +202,14 @@ if __name__ == "__main__":
         print("Path Usage: app/ripple - no forwardslash")
         sys.exit()
 
+    is_reset: bool = bool(os.environ.get('IS_RESET')) or False
     try:
         if action == 'definitions':
             definitions: Dict[str, Any] = read_json(path)
-            run(definitions, amendment)
+            run(definitions, amendment, is_reset)
         if action == 'rippled':
             r_path: str = path + '/src/ripple'
-            run_rippled(r_path, amendment)
+            definitions = get_definitions(r_path)
+            run(definitions, amendment, is_reset)
     except Exception as e:
         print(e)
