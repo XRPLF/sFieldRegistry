@@ -9,14 +9,17 @@
 
 ## Bump Script
 
-You can use the bump script if you already have the definitions file or a rippled build
+You can use the bump script if you already have the definitions file or a rippled build. The script will merge your definition with this repo.
 
 python3 bump.py | action | name | path
 
 - `python3 bump.py definitions Hooks ./definitions.json`
 - `python3 bump.py rippled Hooks ./rippled`
 
-> This will update the `README.md` and the `map.json` file.
+If you would like to know what sfields your rippled build is missing then run with:
+
+- `IS_DEBUG=True python3 bump.py definitions Hooks ./rippled`
+
 
 ## UINT16
 Type 1
