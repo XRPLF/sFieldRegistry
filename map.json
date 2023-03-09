@@ -1,5 +1,33 @@
 {
     "types": {
+        "Done": -1,
+        "Unknown": -2,
+        "NotPresent": 0,
+        "UInt16": 1,
+        "UInt32": 2,
+        "UInt64": 3,
+        "Hash128": 4,
+        "Hash256": 5,
+        "Amount": 6,
+        "Blob": 7,
+        "AccountID": 8,
+        "STObject": 14,
+        "STArray": 15,
+        "UInt8": 16,
+        "Hash160": 17,
+        "PathSet": 18,
+        "Vector256": 19,
+        "UInt96": 20,
+        "UInt192": 21,
+        "UInt384": 22,
+        "UInt512": 23,
+        "Transaction": 10001,
+        "LedgerEntry": 10002,
+        "Validation": 10003,
+        "Metadata": 10004,
+        "Issue": 24
+    },
+    "type_map": {
         "NotPresent": {},
         "UInt16": {
             "1": "|1|LedgerEntryType|Ledger|n/a|",
@@ -264,7 +292,7 @@
             "4": "|4|Asset2|XLS30|n/a|"
         }
     },
-    "results": {
+    "result_map": {
         "-399": "|-399|telLOCAL_ERROR|v1.10.0|n/a|",
         "-398": "|-398|telBAD_DOMAIN|v1.10.0|n/a|",
         "-397": "|-397|telBAD_PATH_COUNT|v1.10.0|n/a|",
