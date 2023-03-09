@@ -87,7 +87,8 @@
             "45": "|45|HookStateCount|Hooks|n/a|",
             "46": "|46|EmitGeneration|Hooks|n/a|",
             "47": "|47|VoteWeight|XLS30|n/a|",
-            "48": "|48|DiscountedFee|XLS30|n/a|"
+            "48": "|48|DiscountedFee|XLS30|n/a|",
+            "49": "|49|LockCount|XLS34|n/a|"
         },
         "UInt64": {
             "1": "|1|IndexNext|Directories|n/a|",
@@ -172,6 +173,7 @@
             "27": "|27|EPrice|XLS30|n/a|",
             "28": "|28|Price|XLS30|n/a|",
             "29": "|29|LPTokenBalance|XLS30|n/a|",
+            "31": "|31|LockedBalance|XLS34|n/a|",
             "258": "|258|taker_gets_funded|v1.10.0|n/a|",
             "259": "|259|taker_pays_funded|v1.10.0|n/a|"
         },
@@ -433,6 +435,7 @@
         "165": "|165|tecAMM_FAILED_WITHDRAW|XLS30|n/a|",
         "166": "|166|tecAMM_INVALID_TOKENS|XLS30|n/a|",
         "167": "|167|tecAMM_FAILED_BID|XLS30|n/a|",
-        "168": "|168|tecAMM_FAILED_VOTE|XLS30|n/a|"
+        "168": "|168|tecAMM_FAILED_VOTE|XLS30|n/a|",
+        "187": "|187|tecPRECISION_LOSS|XLS34|n/a|"
     }
 }
