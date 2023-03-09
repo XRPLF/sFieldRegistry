@@ -43,6 +43,7 @@ Type 2
 
 |Field Code|Field Name|Used by|Reserved by|
 |-|-|-|-|
+|1|NetworkID|NetworkID|n/a|
 |2|Flags|Transaction|n/a|
 |3|SourceTag|Transaction|n/a|
 |4|Sequence|Transaction|n/a|
@@ -372,6 +373,9 @@ Type 24
 |-389|telCAN_NOT_QUEUE_BLOCKED|v1.10.0|n/a|
 |-388|telCAN_NOT_QUEUE_FEE|v1.10.0|n/a|
 |-387|telCAN_NOT_QUEUE_FULL|v1.10.0|n/a|
+|-386|telWRONG_NETWORK|NetworkID|n/a|
+|-385|telREQUIRES_NETWORK_ID|NetworkID|n/a|
+|-384|telNETWORK_ID_MAKES_TX_NON_CANONICAL|NetworkID|n/a|
 |-299|temMALFORMED|v1.10.0|n/a|
 |-298|temBAD_AMOUNT|v1.10.0|n/a|
 |-297|temBAD_CURRENCY|v1.10.0|n/a|
