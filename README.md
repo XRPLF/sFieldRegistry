@@ -161,6 +161,7 @@ Type 5
 |31|HookHash|Hooks|n/a|
 |32|HookNamespace|Hooks|n/a|
 |33|HookSetTxnID|Hooks|n/a|
+|36|URITokenID|XLS35|n/a|
 |257|hash|v1.10.0|n/a|
 |258|index|v1.10.0|n/a|
 
