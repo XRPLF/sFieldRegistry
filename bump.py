@@ -57,7 +57,7 @@ def run(definitions: Dict[str, Any], name: str):
             type_map[tk]
         except Exception as e:
             types[tk] = tv
-            print(f'TYPE ADDED: {e}')
+            if is_debug: print(f'TYPE ADDED: {e}')
         
         if tk not in [k for k, _ in type_map.items()]:
             continue
@@ -88,15 +88,13 @@ def run(definitions: Dict[str, Any], name: str):
                 if str(k) not in get_list(tk, new_type_map):
                     old_type = type_map[tk][str(k)].split('|')[2]
                     old_amendment = type_map[tk][str(k)].split('|')[3]
-                    if is_debug:
-                        print(f'MISSING FIELD: {tk} - {old_type} - {k} - {old_amendment}')
+                    if is_debug: print(f'MISSING FIELD: {tk} - {old_type} - {k} - {old_amendment}')
                     new_type_map[tk][str(k)] = type_map[tk][str(k)]
 
     if not is_reset:
         for k, _ in type_map.items():
             if str(k) not in new_type_map:
-                if is_debug:
-                    print(f'MISSING TYPE: {k}')
+                if is_debug: print(f'MISSING TYPE: {k}')
                 new_type_map[str(k)] = type_map[str(k)]
 
     result_map: Dict[str, Any] = read_json('./map.json')['result_map']
@@ -119,8 +117,7 @@ def run(definitions: Dict[str, Any], name: str):
             if str(k) not in new_result_map:
                 old_result = result_map[str(k)].split('|')[2]
                 old_amendment = result_map[str(k)].split('|')[3]
-                if is_debug:
-                    print(f'MISSING TRANSACTION RESULT: {old_result} - {k} - {old_amendment}')
+                if is_debug: print(f'MISSING TRANSACTION RESULT: {old_result} - {k} - {old_amendment}')
                 new_result_map[str(k)] = result_map[str(k)]
     
     output_value: str = ''
@@ -221,4 +218,4 @@ if __name__ == "__main__":
             definitions = get_definitions(r_path)
             run(definitions, amendment)
     except Exception as e:
-        print(e)
+        raise e
