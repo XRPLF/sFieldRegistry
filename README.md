@@ -90,6 +90,7 @@ Type 2
 |46|EmitGeneration|Hooks|n/a|
 |47|VoteWeight|XLS30|n/a|
 |48|DiscountedFee|XLS30|n/a|
+|49|LockCount|XLS34|n/a|
 
 
 ## UINT64
@@ -194,6 +195,7 @@ Type 6
 |27|EPrice|XLS30|n/a|
 |28|Price|XLS30|n/a|
 |29|LPTokenBalance|XLS30|n/a|
+|31|LockedBalance|XLS34|n/a|
 |258|taker_gets_funded|v1.10.0|n/a|
 |259|taker_pays_funded|v1.10.0|n/a|
 
@@ -504,5 +506,6 @@ Type 24
 |166|tecAMM_INVALID_TOKENS|XLS30|n/a|
 |167|tecAMM_FAILED_BID|XLS30|n/a|
 |168|tecAMM_FAILED_VOTE|XLS30|n/a|
+|187|tecPRECISION_LOSS|XLS34|n/a|
 
 
