@@ -18,7 +18,7 @@ python3 bump.py | action | name | path
 
 If you would like to know what sfields your rippled build is missing then run with:
 
-- `IS_DEBUG=True python3 bump.py definitions Hooks ./rippled`
+- `DEBUG=True python3 bump.py definitions Hooks ./rippled`
 
 
 ## UINT16

@@ -1,0 +1,31 @@
+name: Python 3.9
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: test-rippled
+      run: |
+        python3 download.py develop https://github.com/XRPLF/rippled.git
+        RELEASE=True python3 bump.py rippled FAIL ./tools/rippled-develop
+    - name: test-amm
+      run: |
+        python3 download.py amm-core-functionality https://github.com/gregtatcam/rippled.git
+        RELEASE=True python3 bump.py rippled FAIL ./tools/rippled-amm-core-functionality
+    - name: test-sidechain
+      run: |
+        python3 download.py xbridge https://github.com/seelabs/rippled.git
+        RELEASE=True python3 bump.py rippled FAIL ./tools/rippled-xbridge
