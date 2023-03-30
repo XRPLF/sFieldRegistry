@@ -186,7 +186,6 @@
             "29": "|29|LPTokenBalance|XLS30|n/a|",
             "30": "|30|SignatureReward|XLS38|n/a|",
             "31": "|31|MinAccountCreateAmount|XLS38|n/a|",
-            "32": "|32|LockedBalance|XLS34|n/a|",
             "258": "|258|taker_gets_funded|legacy|n/a|",
             "259": "|259|taker_pays_funded|legacy|n/a|"
         },

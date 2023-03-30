@@ -195,7 +195,7 @@ Type 6
 |18|DeliveredAmount|Partial payments|n/a|
 |19|NFTokenBrokerFee|XLS20|n/a|
 |20|HookCallbackFee|Hooks|n/a|
-|21|LockedBalance|Hooks|n/a|
+|21|LockedBalance|XLS34|n/a|
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
@@ -206,7 +206,6 @@ Type 6
 |29|LPTokenBalance|XLS30|n/a|
 |30|SignatureReward|XLS38|n/a|
 |31|MinAccountCreateAmount|XLS38|n/a|
-|32|LockedBalance|XLS34|n/a|
 |258|taker_gets_funded|legacy|n/a|
 |259|taker_pays_funded|legacy|n/a|
 
