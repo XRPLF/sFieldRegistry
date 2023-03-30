@@ -1,2 +1,5 @@
 __pycache__
 definitions.json
+tools
+.github/workflows/test_runner.py
+requirements.txt
