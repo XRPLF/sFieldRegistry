@@ -151,6 +151,7 @@ Type 5
 |17|InvoiceID|Payment, Check|n/a|
 |18|Nickname|legacy/unused|n/a|
 |19|Amendment|Consensus|n/a|
+|20|HookOn|Hooks|n/a|
 |21|Digest|XLS35|n/a|
 |22|Channel|Paychan|n/a|
 |23|ConsensusHash|Consensus|n/a|
@@ -164,6 +165,8 @@ Type 5
 |31|HookHash|Hooks|n/a|
 |32|HookNamespace|Hooks|n/a|
 |33|HookSetTxnID|Hooks|n/a|
+|34|OfferID|Hooks|n/a|
+|35|EscrowID|XLS35|n/a|
 |36|URITokenID|XLS35|n/a|
 |257|hash|legacy|n/a|
 |258|index|legacy|n/a|
@@ -191,6 +194,8 @@ Type 6
 |17|RippleEscrow|legacy/unused|n/a|
 |18|DeliveredAmount|Partial payments|n/a|
 |19|NFTokenBrokerFee|XLS20|n/a|
+|20|HookCallbackFee|Hooks|n/a|
+|21|LockedBalance|Hooks|n/a|
 |22|BaseFeeDrops|FeeSettings|n/a|
 |23|ReserveBaseDrops|FeeSettings|n/a|
 |24|ReserveIncrementDrops|FeeSettings|n/a|
@@ -235,6 +240,7 @@ Type 7
 |23|HookReturnString|Hooks|n/a|
 |24|HookParameterName|Hooks|n/a|
 |25|HookParameterValue|Hooks|n/a|
+|26|Blob|Hooks|n/a|
 
 
 ## ACCOUNTID
@@ -367,6 +373,7 @@ Type 19
 |2|Hashes|Ledger|n/a|
 |3|Amendments|Ledger|n/a|
 |4|NFTokenOffers|XLS20|n/a|
+|5|HookNamespaces|Hooks|n/a|
 
 
 ## ISSUE
@@ -409,6 +416,7 @@ Type 25
 |-386|telWRONG_NETWORK|NetworkID|n/a|
 |-385|telREQUIRES_NETWORK_ID|NetworkID|n/a|
 |-384|telNETWORK_ID_MAKES_TX_NON_CANONICAL|NetworkID|n/a|
+|-383|telNON_LOCAL_EMITTED_TXN|Hooks|n/a|
 |-299|temMALFORMED|legacy|n/a|
 |-298|temBAD_AMOUNT|legacy|n/a|
 |-297|temBAD_CURRENCY|legacy|n/a|
@@ -448,13 +456,15 @@ Type 25
 |-263|temSEQ_AND_TICKET|legacy|n/a|
 |-262|temBAD_NFTOKEN_TRANSFER_FEE|XLS20|n/a|
 |-261|temAMM_BAD_TOKENS|XLS30|n/a|
-|-260|temEQUAL_DOOR_ACCOUNTS|XLS38|n/a|
-|-259|temBAD_XCHAIN_PROOF|XLS38|n/a|
-|-258|temBRIDGE_BAD_ISSUES|XLS38|n/a|
-|-257|tem_BRIDGE_NONDOOR_OWNER|XLS38|n/a|
+|-260|temXCHAIN_EQUAL_DOOR_ACCOUNTS|XLS38|n/a|
+|-259|temXCHAIN_BAD_PROOF|XLS38|n/a|
+|-258|temXCHAIN_BRIDGE_BAD_ISSUES|XLS38|n/a|
+|-257|temXCHAIN_BRIDGE_NONDOOR_OWNER|XLS38|n/a|
 |-256|temXCHAIN_BRIDGE_BAD_MIN_ACCOUNT_CREATE_AMOUNT|XLS38|n/a|
 |-255|temXCHAIN_BRIDGE_BAD_REWARD_AMOUNT|XLS38|n/a|
 |-254|temXCHAIN_TOO_MANY_ATTESTATIONS|XLS38|n/a|
+|-253|temHOOK_DATA_TOO_LARGE|Hooks|n/a|
+|-252|temHOOK_REJECTED|Hooks|n/a|
 |-199|tefFAILURE|legacy|n/a|
 |-198|tefALREADY|legacy|n/a|
 |-197|tefBAD_ADD_AUTH|legacy|n/a|
@@ -489,6 +499,7 @@ Type 25
 |-89|terQUEUED|legacy|n/a|
 |-88|terPRE_TICKET|Tickets|n/a|
 |-87|terNO_AMM|XLS30|n/a|
+|-86|terNO_HOOK|Hooks|n/a|
 |0|tesSUCCESS|legacy|n/a|
 |100|tecCLAIM|legacy|n/a|
 |101|tecPATH_PARTIAL|legacy|n/a|
@@ -528,15 +539,15 @@ Type 25
 |150|tecKILLED|legacy|n/a|
 |151|tecHAS_OBLIGATIONS|legacy|n/a|
 |152|tecTOO_SOON|legacy|n/a|
-|153|tecHOOK_ERROR|Hooks|n/a|
-|154|tecMAX_SEQUENCE_REACHED|XLS20|n/a|
+|153|tecHOOK_REJECTED|Hooks|n/a|
+|154|tecMAX_SEQUENCE_REACHED|legacy|n/a|
 |155|tecNO_SUITABLE_NFTOKEN_PAGE|XLS20|n/a|
 |156|tecNFTOKEN_BUY_SELL_MISMATCH|XLS20|n/a|
 |157|tecNFTOKEN_OFFER_TYPE_MISMATCH|XLS20|n/a|
 |158|tecCANT_ACCEPT_OWN_NFTOKEN_OFFER|XLS20|n/a|
-|159|tecINSUFFICIENT_FUNDS|XLS20|n/a|
-|160|tecOBJECT_NOT_FOUND|XLS20|n/a|
-|161|tecINSUFFICIENT_PAYMENT|XLS20|n/a|
+|159|tecINSUFFICIENT_FUNDS|legacy|n/a|
+|160|tecOBJECT_NOT_FOUND|legacy|n/a|
+|161|tecINSUFFICIENT_PAYMENT|legacy|n/a|
 |162|tecAMM_UNFUNDED|XLS30|n/a|
 |163|tecAMM_BALANCE|XLS30|n/a|
 |164|tecAMM_FAILED_DEPOSIT|XLS30|n/a|
@@ -544,23 +555,23 @@ Type 25
 |166|tecAMM_INVALID_TOKENS|XLS30|n/a|
 |167|tecAMM_FAILED_BID|XLS30|n/a|
 |168|tecAMM_FAILED_VOTE|XLS30|n/a|
-|169|tecBAD_XCHAIN_TRANSFER_ISSUE|XLS38|n/a|
-|170|tecXCHAIN_NO_CLAIM_ID|XLS38|n/a|
-|171|tecXCHAIN_BAD_CLAIM_ID|XLS38|n/a|
-|172|tecXCHAIN_CLAIM_NO_QUORUM|XLS38|n/a|
-|173|tecXCHAIN_PROOF_UNKNOWN_KEY|XLS38|n/a|
-|174|tecXCHAIN_CREATE_ACCOUNT_NONXRP_ISSUE|XLS38|n/a|
-|175|tecXCHAIN_WRONG_CHAIN|XLS38|n/a|
-|176|tecXCHAIN_REWARD_MISMATCH|XLS38|n/a|
-|177|tecXCHAIN_NO_SIGNERS_LIST|XLS38|n/a|
-|178|tecXCHAIN_SENDING_ACCOUNT_MISMATCH|XLS38|n/a|
-|179|tecXCHAIN_INSUFF_CREATE_AMOUNT|XLS38|n/a|
-|180|tecXCHAIN_ACCOUNT_CREATE_PAST|XLS38|n/a|
-|181|tecXCHAIN_ACCOUNT_CREATE_TOO_MANY|XLS38|n/a|
-|182|tecXCHAIN_PAYMENT_FAILED|XLS38|n/a|
-|183|tecXCHAIN_SELF_COMMIT|XLS38|n/a|
-|184|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|
-|185|tecXCHAIN_CREATE_ACCOUNT_DISABLED|XLS38|n/a|
-|186|tecPRECISION_LOSS|XLS34|n/a|
+|169|tecREQUIRES_FLAG|Hooks|n/a|
+|170|tecPRECISION_LOSS|Hooks|n/a|
+|171|tecBAD_XCHAIN_TRANSFER_ISSUE|XLS38|n/a|
+|172|tecXCHAIN_NO_CLAIM_ID|XLS38|n/a|
+|173|tecXCHAIN_BAD_CLAIM_ID|XLS38|n/a|
+|174|tecXCHAIN_CLAIM_NO_QUORUM|XLS38|n/a|
+|175|tecXCHAIN_PROOF_UNKNOWN_KEY|XLS38|n/a|
+|176|tecXCHAIN_CREATE_ACCOUNT_NONXRP_ISSUE|XLS38|n/a|
+|177|tecXCHAIN_WRONG_CHAIN|XLS38|n/a|
+|178|tecXCHAIN_REWARD_MISMATCH|XLS38|n/a|
+|179|tecXCHAIN_NO_SIGNERS_LIST|XLS38|n/a|
+|180|tecXCHAIN_SENDING_ACCOUNT_MISMATCH|XLS38|n/a|
+|181|tecXCHAIN_INSUFF_CREATE_AMOUNT|XLS38|n/a|
+|182|tecXCHAIN_ACCOUNT_CREATE_PAST|XLS38|n/a|
+|183|tecXCHAIN_ACCOUNT_CREATE_TOO_MANY|XLS38|n/a|
+|184|tecXCHAIN_PAYMENT_FAILED|XLS38|n/a|
+|185|tecXCHAIN_SELF_COMMIT|XLS38|n/a|
+|186|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|
 
 
