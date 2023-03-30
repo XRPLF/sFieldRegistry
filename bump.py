@@ -77,7 +77,12 @@ def run(definitions: Dict[str, Any], name: str):
             else:
                 old_type = type_map[tk][str(nth)].split('|')[2]
                 if old_type != type:
-                    raise ValueError(f'TYPES: Merge conflict for {type}. {old_type} already exists at {nth}. Please choose a different number.')
+                    print(f'TYPES: Merge conflict for {type}. {old_type} already exists at {nth}.')
+                    response = input(f"Do you want to overwrite `{old_type}`? (yes/no) ").lower()
+                    if response == "yes":
+                        new_type_map[tk][f'{nth}'] = f'|{nth}|{type}|{name}|n/a|'
+                    else:
+                        raise KeyboardInterrupt(f'Please update `{old_type}` at {nth} and try again.')
                     # new_type_map[tk][f'{nth}'] = f'|{nth}|{type}|{name}|n/a|'
                 else:
                     new_type_map[tk][str(nth)] = type_map[tk][str(nth)]
@@ -106,7 +111,12 @@ def run(definitions: Dict[str, Any], name: str):
         else:
             old_result = result_map[str(rv)].split('|')[2]
             if old_result != rk:
-                raise ValueError(f'TRANSACTION_RESULTS: Merge conflict for {rk}. {old_result} already exists at {rv}. Please choose a different number.')
+                    print(f'TRANSACTION_RESULTS: Merge conflict for {rk}. {old_result} already exists at {rv}.')
+                    response = input(f"Do you want to overwrite the `{old_result}` at {rv}? (yes/no) ").lower()
+                    if response == "yes":
+                        new_result_map[str(rv)] = f'|{rv}|{rk}|{name}|n/a|'
+                    else:
+                        raise KeyboardInterrupt(f'Please update `{old_result}` at {rv} and try again.')
                 # new_result_map[str(rv)] = f'|{rv}|{rk}|{name}|n/a|'
             else:
                 new_result_map[str(rv)] = result_map[str(rv)]
