@@ -36,6 +36,7 @@
             "3": "|3|SignerWeight|Transaction|n/a|",
             "4": "|4|TransferFee|Transaction|n/a|",
             "5": "|5|TradingFee|XLS30|n/a|",
+            "6": "|6|DiscountedFee|XLS30|n/a|",
             "16": "|16|Version|n/a|n/a|",
             "17": "|17|HookStateChangeCount|Hooks|n/a|",
             "18": "|18|HookEmitCount|Hooks|n/a|",
@@ -88,9 +89,9 @@
             "44": "|44|BurnedNFTokens|XLS20|n/a|",
             "45": "|45|HookStateCount|Hooks|n/a|",
             "46": "|46|EmitGeneration|Hooks|n/a|",
-            "47": "|47|VoteWeight|XLS30|n/a|",
-            "48": "|48|DiscountedFee|XLS30|n/a|",
-            "49": "|49|LockCount|XLS34|n/a|"
+            "47": "|47|LockCount|XLS34|n/a|",
+            "48": "|48|VoteWeight|XLS30|n/a|",
+            "50": "|50|FirstNFTokenSequence|XLS30|n/a|"
         },
         "UInt64": {
             "1": "|1|IndexNext|Directories|n/a|",
@@ -183,9 +184,9 @@
             "26": "|26|LPTokenIn|XLS30|n/a|",
             "27": "|27|EPrice|XLS30|n/a|",
             "28": "|28|Price|XLS30|n/a|",
-            "29": "|29|LPTokenBalance|XLS30|n/a|",
-            "30": "|30|SignatureReward|XLS38|n/a|",
-            "31": "|31|MinAccountCreateAmount|XLS38|n/a|",
+            "29": "|29|SignatureReward|XLS38|n/a|",
+            "30": "|30|MinAccountCreateAmount|XLS38|n/a|",
+            "31": "|31|LPTokenBalance|XLS30|n/a|",
             "258": "|258|taker_gets_funded|legacy|n/a|",
             "259": "|259|taker_pays_funded|legacy|n/a|"
         },
@@ -264,7 +265,11 @@
             "28": "|28|XChainClaimProofSig|XLS38|n/a|",
             "29": "|29|XChainCreateAccountProofSig|XLS38|n/a|",
             "30": "|30|XChainClaimAttestationBatchElement|XLS38|n/a|",
-            "31": "|31|XChainCreateAccountAttestationBatchElement|XLS38|n/a|"
+            "31": "|31|XChainCreateAccountAttestationBatchElement|XLS38|n/a|",
+            "32": "|32|XChainClaimProofSig|XLS30|n/a|",
+            "33": "|33|XChainCreateAccountProofSig|XLS30|n/a|",
+            "34": "|34|XChainClaimAttestationCollectionElement|XLS30|n/a|",
+            "35": "|35|XChainCreateAccountAttestationCollectionElement|XLS30|n/a|"
         },
         "STArray": {
             "1": "|1|ArrayEndMarker|Arrays|n/a|",
@@ -284,10 +289,8 @@
             "19": "|19|HookParameters|Hooks|n/a|",
             "20": "|20|HookGrants|Hooks|n/a|",
             "21": "|21|AuthAccounts|XLS30|n/a|",
-            "22": "|22|XChainClaimAttestationBatch|XLS38|n/a|",
-            "23": "|23|XChainCreateAccountAttestationBatch|XLS38|n/a|",
-            "24": "|24|XChainClaimAttestations|XLS38|n/a|",
-            "25": "|25|XChainCreateAccountAttestations|XLS38|n/a|"
+            "22": "|22|XChainClaimAttestations|XLS38|n/a|",
+            "23": "|23|XChainCreateAccountAttestations|XLS38|n/a|"
         },
         "UInt8": {
             "1": "|1|CloseResolution|Consensus|n/a|",
@@ -484,23 +487,22 @@
         "166": "|166|tecAMM_INVALID_TOKENS|XLS30|n/a|",
         "167": "|167|tecAMM_FAILED_BID|XLS30|n/a|",
         "168": "|168|tecAMM_FAILED_VOTE|XLS30|n/a|",
-        "169": "|169|tecREQUIRES_FLAG|Hooks|n/a|",
-        "170": "|170|tecPRECISION_LOSS|XLS34|n/a|",
-        "171": "|171|tecBAD_XCHAIN_TRANSFER_ISSUE|XLS38|n/a|",
-        "172": "|172|tecXCHAIN_NO_CLAIM_ID|XLS38|n/a|",
-        "173": "|173|tecXCHAIN_BAD_CLAIM_ID|XLS38|n/a|",
-        "174": "|174|tecXCHAIN_CLAIM_NO_QUORUM|XLS38|n/a|",
-        "175": "|175|tecXCHAIN_PROOF_UNKNOWN_KEY|XLS38|n/a|",
-        "176": "|176|tecXCHAIN_CREATE_ACCOUNT_NONXRP_ISSUE|XLS38|n/a|",
-        "177": "|177|tecXCHAIN_WRONG_CHAIN|XLS38|n/a|",
-        "178": "|178|tecXCHAIN_REWARD_MISMATCH|XLS38|n/a|",
-        "179": "|179|tecXCHAIN_NO_SIGNERS_LIST|XLS38|n/a|",
-        "180": "|180|tecXCHAIN_SENDING_ACCOUNT_MISMATCH|XLS38|n/a|",
-        "181": "|181|tecXCHAIN_INSUFF_CREATE_AMOUNT|XLS38|n/a|",
-        "182": "|182|tecXCHAIN_ACCOUNT_CREATE_PAST|XLS38|n/a|",
-        "183": "|183|tecXCHAIN_ACCOUNT_CREATE_TOO_MANY|XLS38|n/a|",
-        "184": "|184|tecXCHAIN_PAYMENT_FAILED|XLS38|n/a|",
-        "185": "|185|tecXCHAIN_SELF_COMMIT|XLS38|n/a|",
-        "186": "|186|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|"
+        "169": "|169|tecXCHAIN_BAD_TRANSFER_ISSUE|XLS38|n/a|",
+        "170": "|170|tecXCHAIN_NO_CLAIM_ID|XLS38|n/a|",
+        "171": "|171|tecXCHAIN_BAD_CLAIM_ID|XLS38|n/a|",
+        "172": "|172|tecXCHAIN_CLAIM_NO_QUORUM|XLS38|n/a|",
+        "173": "|173|tecXCHAIN_PROOF_UNKNOWN_KEY|XLS38|n/a|",
+        "174": "|174|tecXCHAIN_CREATE_ACCOUNT_NONXRP_ISSUE|XLS38|n/a|",
+        "175": "|175|tecXCHAIN_WRONG_CHAIN|XLS38|n/a|",
+        "176": "|176|tecXCHAIN_REWARD_MISMATCH|XLS38|n/a|",
+        "177": "|177|tecXCHAIN_NO_SIGNERS_LIST|XLS38|n/a|",
+        "178": "|178|tecXCHAIN_SENDING_ACCOUNT_MISMATCH|XLS38|n/a|",
+        "179": "|179|tecXCHAIN_INSUFF_CREATE_AMOUNT|XLS38|n/a|",
+        "180": "|180|tecXCHAIN_ACCOUNT_CREATE_PAST|XLS38|n/a|",
+        "181": "|181|tecXCHAIN_ACCOUNT_CREATE_TOO_MANY|XLS38|n/a|",
+        "182": "|182|tecXCHAIN_PAYMENT_FAILED|XLS38|n/a|",
+        "183": "|183|tecXCHAIN_SELF_COMMIT|XLS38|n/a|",
+        "184": "|184|tecXCHAIN_BAD_PUBLIC_KEY_ACCOUNT_PAIR|XLS38|n/a|",
+        "185": "|185|tecXCHAIN_CREATE_ACCOUNT_DISABLED|XLS30|n/a|"
     }
 }
