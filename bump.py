@@ -3,8 +3,6 @@ import sys
 import json
 from typing import List, Dict, Any
 
-from gen import get_definitions
-
 
 def read_file(path: str):
     with open(path, "r") as f:
@@ -173,8 +171,7 @@ You can use the bump script if you already have the definitions file or a ripple
 
 python3 bump.py | action | name | path
 
-- `python3 bump.py definitions Hooks ./definitions.json`
-- `python3 bump.py rippled Hooks ./rippled`
+- `python3 bump.py definitions XLS30 ./definitions.json`
 
 If you would like to know what sfields your rippled build is missing then run with:
 
@@ -235,30 +232,19 @@ If you would like to know what sfields your rippled build is missing then run wi
     )
 
 
-action_list: List[str] = ["definitions", "rippled"]
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
-        print("Usage: python3 bump.py <action> <amendment> <path>")
+    if len(sys.argv) < 3:
+        print("Usage: python3 bump.py <amendment> <path>")
         sys.exit()
 
-    action: str = sys.argv[1]
-    if action not in action_list:
-        print(f"Usage: action must be {[f' {i}' for i in action_list]}")
-        sys.exit()
-
-    amendment: str = sys.argv[2]
-    path: str = sys.argv[3]
+    amendment: str = sys.argv[1]
+    path: str = sys.argv[2]
     if path[-1] == "/":
         print("Path Usage: app/ripple - no forwardslash")
         sys.exit()
 
     try:
-        if action == "definitions":
-            definitions: Dict[str, Any] = read_json(path)
-            run(definitions, amendment)
-        if action == "rippled":
-            r_path: str = path + "/src/ripple"
-            definitions = get_definitions(r_path)
-            run(definitions, amendment)
+        definitions: Dict[str, Any] = read_json(path)
+        run(definitions, amendment)
     except Exception as e:
         raise e
