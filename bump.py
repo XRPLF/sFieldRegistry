@@ -156,6 +156,76 @@ def run(definitions: Dict[str, Any], name: str):
                     )
                 new_result_map[str(k)] = result_map[str(k)]
 
+    entry_map: Dict[str, Any] = read_json("./map.json")["entry_map"]
+    new_entry_map: Dict[str, Any] = {}
+    for lek, lev in definitions["LEDGER_ENTRY_TYPES"].items():
+        if str(lev) not in entry_map:
+            new_entry_map[str(lev)] = f"|{lev}|{lek}|{name}|n/a|"
+        else:
+            old_ledger_entry = entry_map[str(lev)].split("|")[2]
+            if old_ledger_entry != lek:
+                print(
+                    f"LEDGER_ENTRY_TYPES: Merge conflict for {lek}. {old_ledger_entry} already exists at {lev}."
+                )
+                response = (
+                    input(
+                        f"Do you want to overwrite the `{old_ledger_entry}` at {lev}? (yes/no) "
+                    ).lower()
+                    if not is_release
+                    else "no"
+                )
+                if response == "yes":
+                    new_entry_map[str(lev)] = f"|{lev}|{lek}|{name}|n/a|"
+                else:
+                    raise KeyboardInterrupt(
+                        f"Please update `{old_ledger_entry}` at {lev} and try again."
+                    )
+            else:
+                new_entry_map[str(lev)] = entry_map[str(lev)]
+
+    if not is_reset:
+        for k, _ in entry_map.items():
+            if str(k) not in new_entry_map:
+                if is_debug:
+                    print(f"MISSING LEDGER ENTRY: {k}")
+                new_entry_map[str(k)] = entry_map[str(k)]
+
+    tt_map: Dict[str, Any] = read_json("./map.json")["tt_map"]
+    new_tt_map: Dict[str, Any] = {}
+    for lek, lev in definitions["TRANSACTION_TYPES"].items():
+        if str(lev) not in tt_map:
+            new_tt_map[str(lev)] = f"|{lev}|{lek}|{name}|n/a|"
+        else:
+            old_tt = tt_map[str(lev)].split("|")[2]
+            if old_tt != lek:
+                print(
+                    f"TRANSACTION_TYPES: Merge conflict for {lek}. {old_tt} already exists at {lev}."
+                )
+                response = (
+                    input(
+                        f"Do you want to overwrite the `{old_tt}` at {lev}? (yes/no) "
+                    ).lower()
+                    if not is_release
+                    else "no"
+                )
+                if response == "yes":
+                    new_tt_map[str(lev)] = f"|{lev}|{lek}|{name}|n/a|"
+                else:
+                    raise KeyboardInterrupt(
+                        f"Please update `{old_tt}` at {lev} and try again."
+                    )
+            else:
+                new_tt_map[str(lev)] = tt_map[str(lev)]
+
+    if not is_reset:
+        for k, _ in tt_map.items():
+            if str(k) not in new_tt_map:
+                if is_debug:
+                    print(f"MISSING TT: {k}")
+                new_tt_map[str(k)] = tt_map[str(k)]
+
+    # return
+
     output_value: str = """
 # SFCode Registry Tables
 
@@ -221,6 +291,40 @@ If you would like to know what sfields your rippled build is missing then run wi
     output_value += "\n"
     output_value += "\n"
 
+    output_value += f"## TRANSACTION TYPES" + "\n"
+    output_value += "\n"
+    output_value += """
+|Type Code|Tx Name|Used by|Reserved by|
+|-|-|-|-|
+"""
+    sorted_tts = {
+        k: v for k, v in sorted(new_tt_map.items(), key=lambda item: int(item[0]))
+    }
+    for k, v in sorted_tts.items():
+        output_value += v
+        output_value += "\n"
+        v = None
+
+    output_value += "\n"
+    output_value += "\n"
+
+    output_value += f"## LEDGER ENTRY TYPES" + "\n"
+    output_value += "\n"
+    output_value += """
+|Type Code|Entry Name|Used by|Reserved by|
+|-|-|-|-|
+"""
+    sorted_entries = {
+        k: v for k, v in sorted(new_entry_map.items(), key=lambda item: int(item[0]))
+    }
+    for k, v in sorted_entries.items():
+        output_value += v
+        output_value += "\n"
+        v = None
+
+    output_value += "\n"
+    output_value += "\n"
+
     write_file("./README.md", output_value)
     write_json(
         "./map.json",
@@ -228,6 +332,8 @@ If you would like to know what sfields your rippled build is missing then run wi
             "types": types,
             "type_map": new_type_map,
             "result_map": sorted_results,
+            "entry_map": sorted_entries,
+            "tt_map": sorted_tts,
         },
     )
 
